@@ -1,0 +1,10 @@
+# Dependencies
+node_modules
+node_modules/
+
+# Generated artifacts
+*.inspect.ndjson
+*.zip
+
+# macOS
+.DS_Store

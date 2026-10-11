@@ -1,0 +1,188 @@
+[
+  [
+    "1. Recurring 7 days",
+    "PASS",
+    "Current closed. Next due 2026-10-14.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "1. Recurring 15 days",
+    "PASS",
+    "Current closed. Next due 2026-10-22.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "1. Recurring 30 days",
+    "PASS",
+    "Current closed. Next due 2026-11-06.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "2. Single-point completion",
+    "PASS",
+    "One proof entry and Submit closes current cycle.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "3. Daily completion",
+    "PASS",
+    "Friday completed with update text. Next cycle Monday.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "7a. Deadline boundary",
+    "PASS",
+    "No overdue email at exact deadline.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "4. Same-day manager alert",
+    "PASS",
+    "Manager notification simulated at 18:01 same day.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "5. Manager acknowledgement",
+    "PASS",
+    "Acknowledged at 19:00. Task remains overdue until employee completes.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "6a. Unresolved leadership escalation",
+    "PASS",
+    "Acknowledged but still open at due plus 24 hours.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "7b. Acknowledgement boundary",
+    "PASS",
+    "No escalation before two hours from notification.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "6b. Missing acknowledgement",
+    "PASS",
+    "Leadership notification simulated at manager sent plus two hours.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "8. No duplicate cycles or alerts",
+    "PASS",
+    "Repeated runs retain 2 cycles and 2 unique alerts.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "8b. No duplicate completion",
+    "PASS",
+    "Completion timestamp remains unchanged. No alert for completed work.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Additional. Missing proof",
+    "PASS",
+    "Blank proof rejected, cycle stays open.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Additional. Future completion",
+    "PASS",
+    "Future cycle submission rejected.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Additional. Resolution cancels escalation",
+    "PASS",
+    "Completed after manager alert, before escalation. No leadership email.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Additional. Holiday skip",
+    "PASS",
+    "Weekend and Monday holiday skipped.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Additional. Missed cycle backlog",
+    "PASS",
+    "Missed cycles retained separately, plus current and next cycle.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Daily evidence quality",
+    "PASS",
+    "A one-word daily attestation is rejected.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Stale leadership alert cancellation",
+    "PASS",
+    "Queued acknowledgement escalation cancelled when manager reviews.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Resolution after cancelled alert",
+    "PASS",
+    "Same unique leadership ID reused when resolution SLA later fails.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Late completion preserves schedule",
+    "PASS",
+    "Completion on 8 October keeps next scheduled due on 14 October.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Ticket format validation",
+    "PASS",
+    "Ticket with spaces rejected before completion.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Invalid calendar date",
+    "PASS",
+    "30 February rejected instead of silently rolling into March.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Frequency mismatch",
+    "PASS",
+    "7 day label with 15 day period rejected.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Duplicate task IDs",
+    "PASS",
+    "Duplicate master ID stops the run before creation.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Duplicate cycle IDs",
+    "PASS",
+    "Duplicate cycle stops the run.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Duplicate alert IDs",
+    "PASS",
+    "Duplicate alert stops the run before delivery.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Inactive task cancels unsent alert",
+    "PASS",
+    "Deactivated task does not send an already queued message.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Email validation",
+    "PASS",
+    "Placeholder, reserved and malformed recipients rejected.",
+    "Local shared-engine simulation"
+  ],
+  [
+    "Timed demonstration routing",
+    "PASS",
+    "Demo-only inbox and one-minute acknowledgement SLA used. Normal SLA stays unchanged.",
+    "Local shared-engine simulation"
+  ]
+]

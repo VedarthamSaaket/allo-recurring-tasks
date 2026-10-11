@@ -1,0 +1,118 @@
+Recurring-task automation prototype
+
+Files to submit
+- Working Google Sheets link with the script installed.
+- Recurring_Tasks.xlsx as a downloadable copy.
+- Automation.gs as the automation source.
+- This note and the completed demonstration evidence.
+
+Verification so far
+- 31 shared-engine tests passed locally.
+- Mock adapter checks passed for sheet writes, email calls, permissions, history and repeated runs.
+- Workbook formulas and plain layout were checked.
+- The saved alerts are SIMULATED. No real emails were sent during local testing.
+- Google permissions, trigger execution and inbox delivery still need the live test below.
+
+Install
+1. Upload Recurring_Tasks.xlsx to Google Drive. Open in Google Sheets and choose File > Save as Google Sheets.
+2. Open Extensions > Apps Script. Replace Code.gs with the full Automation.gs contents. Save.
+3. Set the Apps Script project time zone to Asia/Kolkata.
+4. Keep normal Email mode = DRY_RUN. Enter real manager and leadership addresses in Settings.
+5. Enter real employee emails in Task Master. Share the sheet with those accounts as editors.
+6. Run setup as the sheet owner and approve Google's permissions. Reload the workbook.
+7. Run Recurring tasks > Check installation. Read Setup Check and fix NEEDS ACTION rows.
+8. Run Recurring tasks > Run isolated demo tests. Test Cases should show 31 passing cases. This sends no emails.
+
+Employee process
+- Work in Employee Tasks. Use a personal filter view for your name and Due or Overdue status.
+- Portal task: complete the portal action, enter Ticket ID in H and tick Submit in I.
+- Daily task: paste the posted WhatsApp update or a screenshot link in H and tick I.
+- Daily proof needs at least 12 characters. A short yes or done is rejected.
+- Time and accepted proof are recorded automatically. Completion History needs no employee update.
+
+Manager process
+- Use Manager Review for pending counts and overdue rows across all employees.
+- Find the alerted Cycle ID in Employee Tasks.
+- Contact the employee, enter the action in M and tick acknowledgement in L.
+- Acknowledgement is timestamped. The task stays overdue until the employee completes it.
+
+Recurrence and SLA
+- Daily tasks use Monday to Friday and skip Settings holidays.
+- 7, 15 and 30 day tasks use calendar days from the scheduled due date.
+- Late completion does not push the next due date later.
+- Unfinished cycles stay visible. One future cycle is prepared automatically.
+- Normal deadline is 18:00 IST, configurable by task.
+- The first successful scheduler run after the deadline alerts the manager.
+- Acknowledgement is due 2 elapsed hours after the manager email is sent.
+- Resolution is due 24 elapsed hours after the task deadline.
+- Leadership gets one alert if either SLA fails. Completing the task stops further escalation.
+- Two hours allows follow-up. One day allows a portal or access issue to be resolved. SLA hours include weekends.
+- The normal scheduler runs every 15 minutes. Google outages or quota limits can delay it.
+
+Timed live demonstration
+Use a separate copy. Keep the normal operational SLA unchanged.
+1. Keep normal Email mode = DRY_RUN.
+2. Set Manager email and Leadership email to approved test inboxes. Your own inbox can serve both roles.
+3. Set Demo test inbox to the approved inbox for demo messages. Both demo alert levels go there.
+4. Set Demo email mode = LIVE. Only fresh DEMO-RUN tasks use this mode.
+5. Run setup, then Recurring tasks > Prepare timed demo.
+6. Three demo tasks appear, due about two minutes later. The scheduler changes to one minute.
+7. After manager emails arrive, acknowledge the first task and complete it with a Ticket ID.
+8. Leave the second task unacknowledged. It should escalate one minute after its manager notification.
+9. Acknowledge the third task with a note but leave it incomplete. It should escalate three minutes after its deadline.
+10. Leave the workbook untouched while waiting to demonstrate the actual installed time trigger.
+11. Confirm the messages in the inbox. SENT means MailApp accepted the call, not proof of inbox delivery.
+12. Refresh twice. Confirm no duplicate alert IDs, cycle IDs, emails or history entries.
+13. Run Stop timed demo. It deactivates those tasks, keeps their records, restores the previous interval and resets Demo email mode to DRY_RUN.
+14. Run Check installation again. Capture the trigger list and inbox evidence.
+
+The eight required tests
+1. Recurrence: complete a current 7 day task. Show the closed cycle and the next scheduled date.
+2. Single-point update: show Ticket ID and Submit in Employee Tasks, then the automatically created history.
+3. Daily task: paste a real test update or screenshot link. Show the timestamp and next working-day cycle.
+4. Manager email: show the missed deadline and the manager email received that day.
+5. Manager action: enter an action and acknowledge it. Show the timestamp, then employee completion.
+6. Leadership: show missing-acknowledgement and unresolved-task emails.
+7. Timing: show normal 2 hour and 24 hour SLAs alongside separate demo 1 minute and 3 minute settings.
+8. No duplicates: refresh twice and compare unique rows, timestamps and inbox messages.
+
+Extra reliability checks
+- Submit without proof. The task should stay open and show a validation message.
+- Submit a future cycle. It should be rejected.
+- From an employee account, try editing another employee's H and I. Google should deny it after setup.
+- Try editing a completed row. Employee input should be locked.
+- Inspect Completion History. Later owner edits should not overwrite accepted proof.
+- Enter an impossible date or mismatched frequency and period in a test copy. The run should stop clearly.
+- Acknowledge while a leadership email is still queued. The stale acknowledgement alert should be cancelled.
+
+Permissions and limits
+- The owner installs the script and triggers. Do not install from multiple accounts.
+- Open H:I rows allow the assigned employee email and owner after setup.
+- Completed H:I rows are locked for employees. Manager inputs allow the manager and owner.
+- Settings, Task Master, Manager Review, Alert Log and Completion History are protected for the owner.
+- All spreadsheet editors can still view task data and the bound script. Filters do not provide privacy.
+- Completed by is the assigned employee label, not an independently verified login.
+- The owner can override protected fields. History preserves the originally accepted proof.
+- WhatsApp completion is attestation with evidence. Ticket IDs are syntax checked. Neither external service is queried.
+- Portal verification needs the company's API details and access. Do not claim it already exists.
+
+Email failures
+- FAILED: no send attempted because the recipient or quota was unsuitable. Fix the cause, then use Retry FAILED emails.
+- SENDING: delivery uncertain. Check Sent mail and the recipient inbox before retrying.
+- If definitely not sent, the owner can set Delivery status to QUEUED and refresh.
+- If received, mark SENT and enter Sent at instead.
+- Never retry uncertain sends blindly. A spreadsheet write and an email send cannot form one atomic transaction.
+
+Before operational use
+- Keep a separate demonstration copy for evidence.
+- Remove the two original DEMO master rows and deactivate timed demo tasks.
+- Clear demo rows below the headers in Employee Tasks, Alert Log and Completion History in the operating copy.
+- Set the four real first due dates and contact addresses.
+- Run setup in DRY_RUN. Inspect cycles and permissions, then choose LIVE after the email test succeeds.
+- Keep Task IDs stable. For a replacement schedule, deactivate the old task and create a new Task ID.
+
+Google documentation
+Installable triggers: https://developers.google.com/apps-script/guides/triggers/installable
+Service quotas: https://developers.google.com/apps-script/guides/services/quotas
+MailApp: https://developers.google.com/apps-script/reference/mail/mail-app
+Range protection: https://developers.google.com/apps-script/reference/spreadsheet/protection
